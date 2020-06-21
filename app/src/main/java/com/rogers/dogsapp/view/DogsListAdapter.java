@@ -3,9 +3,6 @@ package com.rogers.dogsapp.view;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ImageView;
-import android.widget.LinearLayout;
-import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -16,12 +13,12 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.rogers.dogsapp.R;
 import com.rogers.dogsapp.databinding.ItemDogBinding;
 import com.rogers.dogsapp.model.DogBreed;
-import com.rogers.dogsapp.util.Util;
+
 
 import java.util.ArrayList;
 import java.util.List;
 
-class DogsListAdapter extends RecyclerView.Adapter<DogsListAdapter.DogViewHolder> {
+class DogsListAdapter extends RecyclerView.Adapter<DogsListAdapter.DogViewHolder> implements DogClickListener {
     private ArrayList<DogBreed> dogsList;
 
     public DogsListAdapter(ArrayList<DogBreed> dogsList) {
@@ -45,22 +42,17 @@ class DogsListAdapter extends RecyclerView.Adapter<DogsListAdapter.DogViewHolder
     @Override
     public void onBindViewHolder(@NonNull DogViewHolder holder, int position) {
         holder.itemView.setDog(dogsList.get(position));
-//        ImageView image = holder.itemView.findViewById(R.id.imageView);
-//        TextView name = holder.itemView.findViewById(R.id.name);
-//        TextView lifespan = holder.itemView.findViewById(R.id.lifespan);
-//        LinearLayout layout = holder.itemView.findViewById(R.id.dogLayout);
-//
-//        name.setText(dogsList.get(position).dogBreed);
-//        lifespan.setText(dogsList.get(position).lifeSpan);
-//        Util.loadImage(image, dogsList.get(position).imageUri, Util.getProgressDrawable(image.getContext()));
-//
-//        layout.setOnClickListener(v -> {
-//            ListFragmentDirections.ActionDetail action = ListFragmentDirections.actionDetail();
-//            action.setDogUuid(dogsList.get(position).uuid);
-//            Navigation.findNavController(layout).navigate(action);
-//        });
+        holder.itemView.setListener(this);
     }
 
+    @Override
+    public void onDogClicked(View v) {
+        String uuidString = ((TextView)v.findViewById(R.id.dogId)).getText().toString();
+        int uuid = Integer.valueOf(uuidString);
+        ListFragmentDirections.ActionDetail action = ListFragmentDirections.actionDetail();
+        action.setDogUuid(uuid);
+        Navigation.findNavController(v).navigate(action);
+    }
     @Override
     public int getItemCount() {
         return dogsList.size();
