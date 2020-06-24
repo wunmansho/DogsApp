@@ -47,12 +47,13 @@ class DogsListAdapter extends RecyclerView.Adapter<DogsListAdapter.DogViewHolder
 
     @Override
     public void onDogClicked(View v) {
-        String uuidString = ((TextView)v.findViewById(R.id.dogId)).getText().toString();
+        String uuidString = ((TextView) v.findViewById(R.id.dogId)).getText().toString();
         int uuid = Integer.valueOf(uuidString);
         ListFragmentDirections.ActionDetail action = ListFragmentDirections.actionDetail();
         action.setDogUuid(uuid);
         Navigation.findNavController(v).navigate(action);
     }
+
     @Override
     public int getItemCount() {
         return dogsList.size();
