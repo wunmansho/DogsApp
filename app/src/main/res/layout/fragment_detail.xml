@@ -6,6 +6,7 @@
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:background="@{palette.color}"
         tools:context=".view.DetailFragment">
 
         <ImageView
@@ -66,5 +67,9 @@
         <variable
             name="dog"
             type="com.rogers.dogsapp.model.DogBreed" />
+
+        <variable
+            name="palette"
+            type="com.rogers.dogsapp.model.DogPalette" />
     </data>
 </layout>

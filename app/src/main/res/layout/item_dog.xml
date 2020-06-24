@@ -8,13 +8,6 @@
         android:onClick="@{listener::onDogClicked}"
         android:orientation="horizontal">
 
-        <TextView
-            android:id="@+id/dogId"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@{String.valueOf(dog.uuid)}"
-            android:visibility="gone" />
-
         <ImageView
             android:id="@+id/imageView"
             android:layout_width="0dp"
@@ -49,6 +42,13 @@
 
 
         </LinearLayout>
+
+        <TextView
+            android:id="@+id/dogId"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@{String.valueOf(dog.uuid)}"
+            android:visibility="gone" />
 
 
     </LinearLayout>
