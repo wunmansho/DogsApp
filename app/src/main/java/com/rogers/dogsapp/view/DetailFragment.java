@@ -1,5 +1,7 @@
 package com.rogers.dogsapp.view;
 
+import android.app.PendingIntent;
+import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
@@ -14,6 +16,7 @@ import androidx.lifecycle.ViewModelProviders;
 import androidx.palette.graphics.Palette;
 
 
+import android.telephony.SmsManager;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuInflater;
@@ -162,6 +165,11 @@ public class DetailFragment extends Fragment {
     }
 
     private void sendSms(SmsInfo smsInfo) {
+        Intent intent = new Intent(getContext(), MainActivity.class);
+        PendingIntent pi = PendingIntent.getActivity(getContext(), 0, intent, 0);
+        SmsManager smsManager = SmsManager.getDefault();
+        smsManager.sendTextMessage(smsInfo.to, null, smsInfo.text, pi, null);
+
 
     }
 }
