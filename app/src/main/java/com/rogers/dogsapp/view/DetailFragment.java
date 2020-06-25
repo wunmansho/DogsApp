@@ -37,6 +37,8 @@ public class DetailFragment extends Fragment {
     private DetailViewModel viewModel;
     private FragmentDetailBinding binding;
 
+    private Boolean sendSmsStarted = false;
+
 
     public DetailFragment() {
     }
@@ -112,8 +114,13 @@ public class DetailFragment extends Fragment {
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {
         switch (item.getItemId()) {
             case R.id.action_send_sms: {
-                Toast.makeText(getContext(), "Action send sms", Toast.LENGTH_SHORT).show();
-                break;
+                if(!sendSmsStarted) {
+                    sendSmsStarted = true;
+                    ((MainActivity) getActivity()).checkSmsPermision();
+                }
+
+
+                          break;
             }
             case R.id.action_share: {
                 Toast.makeText(getContext(), "Action share", Toast.LENGTH_SHORT).show();
@@ -122,5 +129,8 @@ public class DetailFragment extends Fragment {
         }
 
         return super.onOptionsItemSelected(item);
+    }
+    public void onPermissionResult(Boolean permissionGranted) {
+        sendSmsStarted = false;
     }
 }
